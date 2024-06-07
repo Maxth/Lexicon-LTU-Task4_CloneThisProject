@@ -1,5 +1,34 @@
 ﻿using System;
 
+/*
+TEORI & FAKTA
+
+Fråga 1: Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess
+grundläggande funktion
+
+Svar: Stacken lagrar värdetyper i en trave där man för att komma åt den näst översta först behöver flytta på den översta osv.
+      Heapen lagrar referenstyper i spridd form där allt är tillgängligt på en gång, likt saker spridda över ett golv.
+
+
+Fråga 2: Vad är Value Types respektive Reference Types och vad skiljer dem åt?
+
+Svar: Value types lagras på stacken medan reference types lagras på heapen. Jag brukar tänka att value types är primitivare typer än reference types,
+      med undantag från string som uppför sig som en value type men som faktiskt är en reference type.
+
+
+Fråga 3:
+
+Svar: Det beror på skillnaden mellan value types och reference types.
+
+      I den första metoden används enbart valuetypes så raden då "y = x" gör ingenting annat än
+      att y "kopierar" värdet på x så efterföljande rad "y = 4" har ingen påverkan på värdet för x.
+
+      I den andra däremot skapar vi upp ett objekt med propertien MyValue. På raden då "y = x" säger vi att y ska PEKA PÅ samma objekt som x redan gör.
+      Raden efter sätts detta objekts MyValue till 4 med "y.MyValue = 4". Sedan returneras x.MyValue vilket vi precis satte till 4, dock med en annan referens än x - nämligen y.
+*/
+
+
+
 namespace SkalProj_Datastrukturer_Minne
 {
     class Program
@@ -10,15 +39,16 @@ namespace SkalProj_Datastrukturer_Minne
         /// <param name="args"></param>
         static void Main()
         {
-
             while (true)
             {
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
-                    + "\n1. Examine a List"
-                    + "\n2. Examine a Queue"
-                    + "\n3. Examine a Stack"
-                    + "\n4. CheckParenthesis"
-                    + "\n0. Exit the application");
+                Console.WriteLine(
+                    "Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                        + "\n1. Examine a List"
+                        + "\n2. Examine a Queue"
+                        + "\n3. Examine a Stack"
+                        + "\n4. CheckParenthesis"
+                        + "\n0. Exit the application"
+                );
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
                 {
@@ -44,7 +74,7 @@ namespace SkalProj_Datastrukturer_Minne
                         CheckParanthesis();
                         break;
                     /*
-                     * Extend the menu to include the recursive 
+                     * Extend the menu to include the recursive
                      * and iterative exercises.
                      */
                     case '0':
@@ -111,9 +141,6 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
-
         }
-
     }
 }
-
