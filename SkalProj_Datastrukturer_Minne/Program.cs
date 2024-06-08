@@ -101,13 +101,60 @@ namespace SkalProj_Datastrukturer_Minne
              * As a default case, tell them to use only + or -
              * Below you can see some inspirational code to begin working.
             */
+            List<string> theList = new List<string>();
+            System.Console.WriteLine(
+                "Enter +<something> or -<something> to add or remove <something> to the list, repectively. Enter anything else to go back to main menu."
+            );
+            bool keepExamining = true;
+            do
+            {
+                string input = Console.ReadLine();
+                char nav = input![0];
+                string value = input.Substring(1);
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        Utils.PrintListDetails(theList);
+                        break;
 
-            //switch(nav){...}
+                    case '-':
+                        theList.Remove(value);
+                        Utils.PrintListDetails(theList);
+                        break;
+                    default:
+                        keepExamining = false;
+                        break;
+                }
+            } while (keepExamining);
+            /*
+            Fråga 2: När ökar listans kapacitet? (Alltså den underliggande arrayens storlek)
+
+            Svar: Den ökar då man lägger till något den inte har plats för.
+
+
+            Fråga 3:  Med hur mycket ökar kapaciteten?
+
+            Svar: Den initiala kapaciteten var 4 och den ökar med en faktor 2 varje gång man lägger till något den inte har plats för.
+
+
+            Fråga 4: Varför ökar inte listans kapacitet i samma takt som element läggs till?
+
+            Svar: Eftersom det är en resurskrävande operation att reallokera listans föremål till en ny array så ökas listans capacity
+                  inte varje gång man lägger till något den inte har plats med.
+
+
+            Fråga 5: Minskar kapaciteten när element tas bort ur listan?
+
+            Svar: Nej. Jag antar av samma anledning som för Fråga 4.
+
+
+            Fråga 6: När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+
+            Svar: När man vet hur många föremål man behöver lagra på förhand.
+            
+            */
         }
 
         /// <summary>
