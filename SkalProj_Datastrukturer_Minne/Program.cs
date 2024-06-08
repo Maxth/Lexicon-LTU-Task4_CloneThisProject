@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Text;
 
 /*
 TEORI & FAKTA
@@ -42,11 +44,12 @@ namespace SkalProj_Datastrukturer_Minne
             while (true)
             {
                 Console.WriteLine(
-                    "Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                    "Please navigate through the menu by inputting the number \n(1, 2, 3 , 4, 5, 0) of your choice"
                         + "\n1. Examine a List"
                         + "\n2. Examine a Queue"
                         + "\n3. Examine a Stack"
                         + "\n4. CheckParenthesis"
+                        + "\n5. ReverseText"
                         + "\n0. Exit the application"
                 );
                 char input = ' '; //Creates the character input to be used with the switch-case below.
@@ -73,6 +76,9 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        ReverseText();
+                        break;
                     /*
                      * Extend the menu to include the recursive
                      * and iterative exercises.
@@ -81,7 +87,7 @@ namespace SkalProj_Datastrukturer_Minne
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4)");
+                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4, 5)");
                         break;
                 }
             }
@@ -103,7 +109,7 @@ namespace SkalProj_Datastrukturer_Minne
             */
             List<string> theList = new List<string>();
             System.Console.WriteLine(
-                "Enter +<something> or -<something> to add or remove <something> to the list, repectively. Enter anything else to go back to main menu."
+                "Enter +<something> or -<something> to add or remove <something> to the list, respectively. Enter anything else to go back to main menu."
             );
             bool keepExamining = true;
             do
@@ -167,6 +173,32 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            bool keepExamining = true;
+
+            Queue<string> queue = new Queue<string>();
+            System.Console.WriteLine(
+                "Enter +<something> or - to add <something> or remove from the queue, respectively. Enter anything else to go back to main menu."
+            );
+            do
+            {
+                string input = Console.ReadLine();
+                char nav = input![0];
+                string value = input.Substring(1);
+                switch (nav)
+                {
+                    case '+':
+                        queue.Enqueue(value);
+                        Utils.PrintCollectionDetails(queue);
+                        break;
+                    case '-':
+                        queue.Dequeue();
+                        Utils.PrintCollectionDetails(queue);
+                        break;
+                    default:
+                        keepExamining = false;
+                        break;
+                }
+            } while (keepExamining);
         }
 
         /// <summary>
@@ -179,6 +211,68 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            bool keepExamining = true;
+
+            Stack<string> stack = new Stack<string>();
+            System.Console.WriteLine(
+                "Enter +<something> or - to add <something> or remove from the stack, respectively. Enter anything else to go back to main menu."
+            );
+            do
+            {
+                string input = Console.ReadLine();
+                char nav = input![0];
+                string value = input.Substring(1);
+                switch (nav)
+                {
+                    case '+':
+                        stack.Push(value);
+                        Utils.PrintCollectionDetails(stack);
+                        break;
+                    case '-':
+                        stack.Pop();
+                        Utils.PrintCollectionDetails(stack);
+                        break;
+                    default:
+                        keepExamining = false;
+                        break;
+                }
+            } while (keepExamining);
+
+            /*
+            Fråga 1: Simulera ännu en gång ICA-kön på papper. Denna gång med en stack. Varför är det
+                     inte så smart att använda en stack i det här fallet?
+            
+            Svar:    Eftersom en kö på ICA kräver FIFU, annars skulle folk bli irriterade. En stack som implementerar FISU skulle medföra
+                     att den senaste personen som ställde sig i kön fick hjälp först, medans den som var först in för vänta längst.
+            
+            */
+        }
+
+        /*
+            Fråga 2: Implementera en ReverseText-metod som läser in en sträng från användaren och
+                     med hjälp av en stack vänder ordning på teckenföljden för att sedan skriva ut den
+                     omvända strängen till användaren.
+        */
+        static void ReverseText()
+        {
+            System.Console.WriteLine("Enter a string to be reverted with the help of a Stack!");
+
+            string input = Console.ReadLine();
+
+            Stack stack = new Stack();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                stack.Push(input[i]);
+            }
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < input.Length; i++)
+            {
+                sb.Append(stack.Pop());
+            }
+
+            System.Console.WriteLine(sb);
         }
 
         static void CheckParanthesis()
