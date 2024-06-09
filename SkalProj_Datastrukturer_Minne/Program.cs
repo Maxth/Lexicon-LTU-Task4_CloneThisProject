@@ -114,7 +114,7 @@ namespace SkalProj_Datastrukturer_Minne
             bool keepExamining = true;
             do
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 char nav = input![0];
                 string value = input.Substring(1);
 
@@ -181,7 +181,7 @@ namespace SkalProj_Datastrukturer_Minne
             );
             do
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 char nav = input![0];
                 string value = input.Substring(1);
                 switch (nav)
@@ -220,7 +220,7 @@ namespace SkalProj_Datastrukturer_Minne
             );
             do
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 char nav = input![0];
                 string value = input.Substring(1);
                 switch (nav)
@@ -258,7 +258,7 @@ namespace SkalProj_Datastrukturer_Minne
         {
             System.Console.WriteLine("Enter a string to be reverted with the help of a Stack!");
 
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;
 
             Stack stack = new Stack();
 
@@ -282,6 +282,56 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+            System.Console.WriteLine("Enter a string to be checked whether it is well formed!");
+
+            string input = Console.ReadLine()!;
+
+            char[] startingParenthesis = ['(', '[', '{'];
+            char[] endingParenthesis = [')', ']', '}'];
+            bool isWellFormed = true;
+            var stack = new Stack<char>();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (startingParenthesis.Contains(input[i]))
+                {
+                    stack.Push(input[i]);
+                }
+                if (endingParenthesis.Contains(input[i]))
+                {
+                    if (stack.Count > 0)
+                    {
+                        if (!isParenthesisMatching(stack.Pop(), input[i]))
+                        {
+                            isWellFormed = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        isWellFormed = false;
+                        break;
+                    }
+                }
+            }
+
+            System.Console.WriteLine("String wellformed: " + isWellFormed);
+        }
+
+        static bool isParenthesisMatching(char openingChar, char closingChar)
+        {
+            switch (openingChar)
+            {
+                case '(':
+                    return closingChar == ')';
+                case '[':
+                    return closingChar == ']';
+                case '{':
+                    return closingChar == '}';
+                default:
+                    return false;
+            }
         }
     }
 }
